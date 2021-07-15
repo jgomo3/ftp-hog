@@ -1,0 +1,24 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure {:mvn/version "1.10.3"}
+        org.apache.mina/mina-core {:mvn/version "2.0.21"}
+        org.slf4j/slf4j-api {:mvn/version "1.7.31"}
+        org.slf4j/slf4j-simple {:mvn/version "1.7.31"}
+        org.apache.ftpserver/ftplet-api {:mvn/version "1.1.1"}
+        org.apache.ftpserver/ftpserver-core {:mvn/version "1.1.1"}}
+ :aliases
+ {:run-m {:main-opts ["-m" "jgomo3.ftp-hog"]}
+  :run-x {:ns-default jgomo3.ftp-hog
+          :exec-fn greet
+          :exec-args {:name "Clojure"}}
+  :test {:extra-paths ["test"]
+         :extra-deps {org.clojure/test.check {:mvn/version "1.1.0"}
+                      io.github.cognitect-labs/test-runner
+                      {:git/url "https://github.com/cognitect-labs/test-runner"
+                       :sha "62ef1de18e076903374306060ac0e8a752e57c86"}}
+         :exec-fn cognitect.test-runner.api/test}
+  :uberjar {:replace-deps {com.github.seancorfield/depstar {:mvn/version "2.1.250"}}
+            :exec-fn hf.depstar/uberjar
+            :exec-args {:aot true
+                        :jar "ftp-hog.jar"
+                        :main-class "jgomo3.ftp-hog"
+                        :sync-pom true}}}}
