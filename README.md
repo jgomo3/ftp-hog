@@ -25,7 +25,25 @@ but super simple. Let's see.
 Run the project directly, via `:exec-fn`:
 
     $ clojure -X:run-x
-    Hello, Clojure!
+    [main] INFO org.apache.ftpserver.impl.DefaultFtpServer - FTP server started
+
+Then, from an FTP client you can connect to the server on port 2221:
+
+    $ ftp localhost 2221
+	Connected to localhost.
+    Service ready for new user.
+     (localhost:jgomo3): anonymous # <--- THE USERNAME IS anonymous
+    Guest login okay, send your complete e-mail address as password.
+    word: # <---------------------------- JUST HIT ENTER (nothing as password)
+    User logged in, proceed.
+    te system type is UNIX.
+     ls
+    Command PORT okay.
+    File status okay; about to open data connection.
+    ------   3 user group            0 Jul 14 20:32 Temp-7a82a302-bb48-4be6-abae-4623cbfedf19
+    ------   3 user group            0 Jul 14 22:30 z1024739842342342344
+    ------   3 user group            0 Jul 14 22:47 temp.txt
+    ------   3 user group            0 Jul 13 12:16 text.tmp
 
 
 ## License
