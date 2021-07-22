@@ -8,7 +8,11 @@
  :aliases
  {:run-m {:main-opts ["-m" "jgomo3.ftp-hog"]}
   :run-x {:ns-default jgomo3.ftp-hog
-          :exec-fn run}
+          :exec-fn run
+          :exec-args {:port 2221
+                      :path "/tmp"
+                      :user "anonymous"
+                      :password ""}}
   :test {:extra-paths ["test"]
          :extra-deps {org.clojure/test.check {:mvn/version "1.1.0"}
                       io.github.cognitect-labs/test-runner

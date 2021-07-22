@@ -46,6 +46,10 @@ Then, from an FTP client you can connect to the server on port 2221:
     ------   3 user group            0 Jul 13 12:16 text.tmp
 
 
+You can specify the port with the `:port` option:
+
+    $ clojure -X:run-x :port 2222
+
 ## License
 
 Copyright © 2021 Jesús Gómez (jgomo3)
