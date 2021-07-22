@@ -1,5 +1,6 @@
 (ns jgomo3.ftp-hog
-  (:require [clojure.java.io :as io])
+  (:require [clojure.java.io :as io]
+            [clojure.string :as str])
   (:import [org.apache.ftpserver FtpServer FtpServerFactory]
            [org.apache.ftpserver.listener ListenerFactory]
            [org.apache.ftpserver.usermanager PropertiesUserManagerFactory]))
@@ -20,12 +21,27 @@
         (.setFile file))
       (.createUserManager)))
 
+(defn welcome [{:keys [port path user password] :as opts}]
+  (let [msj-lines ["ftp-hog: Super simple ftp server so you can code."
+                   ""
+                   "This server is serving a non isolated folder."
+                   "The only security are the limitiations the user you used"
+                   "to execute this process has."
+                   "Keep that in mind!"
+                   ""
+                   (str "Currently listening on port " port)
+                   (str "And serving the path " path)
+                   ""]
+        msj (str/join "\n" msj-lines)]
+    (println msj)))
 
-(defn run [opts]
-  (let [user-manager (-> "conf/users.properties"
-                         io/resource
-                         io/file
-                         create-user-manager)
-        listener (create-listener 2221)
-        server (create-server listener user-manager)]
-    (.start server)))
+(defn run [{:keys [port path user password] :as opts}]
+  (do
+    (welcome opts)
+    (let [user-manager (-> "conf/users.properties"
+                           io/resource
+                           io/file
+                           create-user-manager)
+          listener (create-listener port)
+          server (create-server listener user-manager)]
+      (.start server))))
