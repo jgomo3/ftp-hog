@@ -24,7 +24,7 @@ but super simple. Let's see.
 
 Run the project directly, via `:exec-fn`:
 
-    $ clojure -X:run-x
+    $ clojure -X:run
     [main] INFO org.apache.ftpserver.impl.DefaultFtpServer - FTP server started
 
 Then, from an FTP client you can connect to the server on port 2221:
@@ -48,7 +48,21 @@ Then, from an FTP client you can connect to the server on port 2221:
 
 You can specify the port with the `:port` option:
 
-    $ clojure -X:run-x :port 2222
+    $ clojure -X:run :port 2222
+
+You can also build the `.jar` and then use plain Java to run it.
+
+To create the file `ftp-hog.jar` run:
+
+    $ clojure -X:uberjar
+	
+Then, run it with:
+
+    $ java -jar ftp-hog.jar
+
+Or passing the port as first argument (Notice you don't have to say `:port`)
+
+    $ java -jar frp-hog.jar 2222
 
 ## License
 
